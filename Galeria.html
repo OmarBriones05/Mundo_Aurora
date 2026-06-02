@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Galería - Mundo Aurora</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+    margin:0;
+    font-family:'Trebuchet MS', sans-serif;
+    background:#87CEEB;
+}
+
+header{
+    background:linear-gradient(
+        120deg,
+        #00ff88 0%,
+        #00ffd5 25%,
+        #4da6ff 50%,
+        #8a5cff 75%,
+        #ff66cc 100%
+    );
+    color:white;
+    text-align:center;
+    padding:20px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.2);
+}
+
+.logo{
+    width:120px;
+    height:auto;
+    display:block;
+    margin:0 auto 10px auto;
+}
+
+header h1{
+    margin:0;
+    font-size:2.5em;
+    font-family:'Fredoka', sans-serif;
+    text-shadow:
+        0 0 10px rgba(255,255,255,0.8),
+        0 0 20px rgba(255,255,255,0.5);
+}
+
+nav{
+    background-color:#fff0a8;
+    text-align:center;
+    padding:15px;
+}
+
+nav a{
+    color:#444;
+    text-decoration:none;
+    margin:15px;
+    font-size:18px;
+    font-weight:bold;
+}
+
+nav a:hover{
+    color:#ff1493;
+}
+
+.hero{
+    text-align:center;
+    padding:40px 20px;
+}
+
+.hero h1{
+    color:#0000ff;
+}
+
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:25px;
+    padding:40px;
+    max-width:1400px;
+    margin:auto;
+}
+
+.artwork{
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 6px 15px rgba(0,0,0,0.15);
+    transition:0.3s;
+}
+
+.artwork:hover{
+    transform:translateY(-5px);
+}
+
+.artwork img{
+    width:100%;
+    height:auto;
+}
+
+.artwork h3{
+    text-align:center;
+    color:#0000ff;
+    padding:15px;
+}
+
+footer{
+    background:#6a5acd;
+    color:white;
+    text-align:center;
+    padding:25px;
+    margin-top:40px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+    <img src="Logo.png" alt="Logo Mundo Aurora"  class="logo">
+    <h1>Mundo Aurora</h1>
+</header>
+
+<nav>
+    <a href="index.html">Inicio</a>
+    <a href="personajes.html">Personajes</a>
+    <a href="galeria.html">Galería</a>
+    <a href="cuentos.html">Cuentos</a>
+</nav>
+
+<section class="hero">
+    <h1>Galería Mágica</h1>
+    <p>Explora los dibujos y paisajes del Mundo Aurora.</p>
+</section>
+
+<section class="gallery">
+
+    <div class="artwork">
+        <img src="Familia de pingüinos en la nieve.png" alt="Familia de pingüinos en la nieve">
+        <h3>Familia de pingüinos en la nieve</h3>
+    </div>
+
+    <div class="artwork">
+        <img src="Paisaje.png" alt="Paisaje">
+        <h3>Paisaje</h3>
+    </div>
+
+    <div class="artwork">
+        <img src="El primer encuentro en el bosque.png" alt="El primer encuentro en el bosque">
+        <h3>El primer encuentro en el bosque</h3>
+    </div>
+
+    <div class="artwork">
+        <img src="Pradera.png" alt="Pradera">
+        <h3>Pradera</h3>
+    </div>
+
+    <div class="artwork">
+        <img src="Bosque encantado.png" alt="Bosque encantado">
+        <h3>Bosque encantado</h3>
+    </div>
+
+    <div class="artwork">
+        <img src="Noche bajo la aurora boreal.png" alt="Noche bajo la aurora boreal">
+        <h3>Noche bajo la aurora boreal</h3>
+    </div>
+
+</section>
+
+<footer>
+    ⭐ Hecho con amor para niños y familias ⭐
+</footer>
+
+</body>
+</html>
