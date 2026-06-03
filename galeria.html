@@ -15,7 +15,15 @@
 body{
     margin:0;
     font-family:'Trebuchet MS', sans-serif;
-    background:#87CEEB;
+    background: linear-gradient(
+        135deg,
+        #00ff88 0%,
+        #00ffd5 25%,
+        #4da6ff 50%,
+        #8a5cff 75%,
+        #ff66cc 100%
+    );
+    background-attachment: fixed;
 }
 
 header{
@@ -73,7 +81,11 @@ nav a:hover{
 }
 
 .hero h1{
-    color:#0000ff;
+    color:#ffffff;
+    text-shadow:
+        0 0 10px rgba(255,255,255,0.8),
+        0 0 20px rgba(255,255,255,0.6),
+        0 0 30px rgba(255,255,255,0.4);
 }
 
 .gallery{
@@ -104,7 +116,7 @@ nav a:hover{
 
 .artwork h3{
     text-align:center;
-    color:#0000ff;
+    color:#000000;
     padding:15px;
 }
 
