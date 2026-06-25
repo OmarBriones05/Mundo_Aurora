@@ -201,6 +201,13 @@ footer{
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
+function fillWhiteBackground(){
+    ctx.fillStyle = "#FFFFFF";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
+
+fillWhiteBackground();
+
 const colorPicker = document.getElementById("color");
 const sizePicker = document.getElementById("size");
 
@@ -217,6 +224,7 @@ function saveState(){
     }
 }
 
+fillWhiteBackground();
 saveState();
 
 function startDrawing(e){
@@ -293,6 +301,8 @@ document.getElementById("clearBtn").onclick = ()=>{
     saveState();
 
     ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    fillWhiteBackground();
 };
 
 document.getElementById("undoBtn").onclick = ()=>{
