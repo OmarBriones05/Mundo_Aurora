@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Cuentos - Mundo Aurora</title>
+<title>Mundo Aurora</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,20 +31,17 @@ header{
     text-align:center;
     padding:20px;
     box-shadow:0 4px 10px rgba(0,0,0,0.2);
-
-    display:flex;
-    flex-direction:column;
-    align-items:center;
 }
 
 .logo{
     width:120px;
     height:auto;
     display:block;
-    margin:0 auto 10px;
+    margin:0 auto 10px auto;
 }
 
 header h1{
+    margin:0;
     font-size:2.5em;
     font-family:'Fredoka', sans-serif;
     text-shadow:
@@ -65,6 +61,7 @@ nav a{
     margin:15px;
     font-size:18px;
     font-weight:bold;
+    transition:0.3s;
 }
 
 nav a:hover{
@@ -73,12 +70,12 @@ nav a:hover{
 
 .hero{
     text-align:center;
-    padding:50px 20px;
+    padding:70px 20px;
 }
 
 .hero h1{
+    font-size:3.2em;
     color:#ffffff;
-    font-size:3em;
     text-shadow:
         0 0 10px rgba(255,255,255,0.8),
         0 0 20px rgba(255,255,255,0.6),
@@ -86,10 +83,10 @@ nav a:hover{
 }
 
 .hero p{
-    color:#333;
+    font-size:1.3em;
+    color:#444;
     max-width:700px;
     margin:auto;
-    font-size:1.2em;
 }
 
 .story-box{
