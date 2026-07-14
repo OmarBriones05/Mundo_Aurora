@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Rompecabezas - Mundo Aurora</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+    margin:0;
+    font-family:'Trebuchet MS',sans-serif;
+    background:#87ceeb;
+}
+
+header{
+    background:linear-gradient(
+        120deg,
+        #00ff88 0%,
+        #00ffd5 25%,
+        #4da6ff 50%,
+        #8a5cff 75%,
+        #ff66cc 100%
+    );
+    color:white;
+    text-align:center;
+    padding:20px;
+    box-shadow:0 4px 10px rgba(0,0,0,.2);
+}
+
+.logo{
+    width:120px;
+    display:block;
+    margin:auto;
+}
+
+header h1{
+    margin:0;
+    font-size:2.5em;
+    font-family:'Fredoka',sans-serif;
+    text-shadow:
+        0 0 10px rgba(255,255,255,.8),
+        0 0 20px rgba(255,255,255,.5);
+}
+
+nav{
+    background:#fff0a8;
+    text-align:center;
+    padding:15px;
+}
+
+nav a{
+    color:#444;
+    text-decoration:none;
+    margin:15px;
+    font-size:18px;
+    font-weight:bold;
+}
+
+nav a:hover{
+    color:#ff1493;
+}
+
+.hero{
+    text-align:center;
+    padding:40px 20px;
+}
+
+.hero h1{
+    color:white;
+    font-size:3em;
+    text-shadow:
+        0 0 10px rgba(255,255,255,.8),
+        0 0 20px rgba(255,255,255,.6);
+}
+
+.hero p{
+    color:#333;
+    font-size:1.2em;
+}
+
+.game-container{
+
+    max-width:1200px;
+    margin:auto;
+    padding:20px;
+
+}
+
+.panel{
+
+    background:white;
+    border-radius:25px;
+    padding:20px;
+    box-shadow:0 6px 15px rgba(0,0,0,.15);
+    margin-bottom:25px;
+
+}
+
+.controls{
+
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:15px;
+    align-items:center;
+
+}
+
+select,
+button{
+
+    padding:12px 20px;
+    border:none;
+    border-radius:20px;
+    font-size:16px;
+    font-weight:bold;
+
+}
+
+select{
+
+    background:#eef6ff;
+
+}
+
+button{
+
+    background:#ff69b4;
+    color:white;
+    cursor:pointer;
+    transition:.3s;
+
+}
+
+button:hover{
+
+    background:#ff1493;
+    transform:scale(1.05);
+
+}
+
+.info{
+
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:40px;
+    margin-top:20px;
+    font-size:20px;
+    font-weight:bold;
+
+}
+
+#board{
+
+    width:600px;
+    height:600px;
+
+    margin:30px auto;
+
+    display:grid;
+
+    background:white;
+
+    border:8px solid white;
+
+    border-radius:20px;
+
+    box-shadow:0 6px 15px rgba(0,0,0,.2);
+
+}
+
+.tile{
+
+    border:1px solid rgba(255,255,255,.5);
+
+    background-repeat:no-repeat;
+
+    cursor:grab;
+
+    user-select:none;
+
+}
+
+.tile:hover{
+
+    filter:brightness(1.08);
+
+}
+
+.message{
+
+    display:none;
+
+    text-align:center;
+
+    font-size:2em;
+
+    color:#ff1493;
+
+    margin-top:25px;
+
+    font-family:'Fredoka',sans-serif;
+
+}
+
+footer{
+
+    background:#6a5acd;
+    color:white;
+    text-align:center;
+    padding:25px;
+    margin-top:40px;
+
+}
+
+@media(max-width:700px){
+
+#board{
+
+    width:95vw;
+    height:95vw;
+
+}
+
+.hero h1{
+
+    font-size:2.2em;
+
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<img src="Logo.png" class="logo" alt="Logo">
+
+<h1>Mundo Aurora</h1>
+
+</header>
+
+<nav>
+
+<a href="index.html">Inicio</a>
+<a href="personajes.html">Personajes</a>
+<a href="galeria.html">Galería</a>
+<a href="cuentos.html">Cuentos</a>
+<a href="juegos.html">Juegos</a>
+
+</nav>
+
+<section class="hero">
+
+<h1>Rompecabezas Mágico</h1>
+
+<p>
+Escoge una imagen, selecciona la dificultad y completa el rompecabezas.
+</p>
+
+</section>
+
+<div class="game-container">
+
+<div class="panel">
+
+<div class="controls">
+
+<select id="imageSelect">
+
+<option value="Familia de pingüinos en la nieve.png">
+Familia de pingüinos en la nieve
+</option>
+
+<option value="El primer encuentro en el bosque.png">
+El primer encuentro en el bosque
+</option>
+
+<option value="Pradera.png">
+Pradera
+</option>
+
+<option value="Bosque encantado.png">
+Bosque encantado
+</option>
+
+<option value="Paisaje.png">
+Paisaje
+</option>
+
+<option value="Noche bajo la aurora boreal.png">
+Noche bajo la aurora boreal
+</option>
+
+</select>
+
+<select id="difficulty">
+
+<option value="3">Fácil (3×3)</option>
+
+<option value="4">Medio (4×4)</option>
+
+<option value="5">Difícil (5×5)</option>
+
+</select>
+
+<button id="startBtn">
+🎲 Mezclar
+</button>
+
+</div>
+
+<div class="info">
+
+<div>
+Movimientos:
+<span id="moves">0</span>
+</div>
+
+<div>
+Tiempo:
+<span id="time">00:00</span>
+</div>
+
+</div>
+
+</div>
+
+<div id="board"></div>
+
+<div class="message" id="message">
+
+🌟 ¡Felicidades! ¡Completaste el rompecabezas! 🌟
+
+</div>
+
+</div>
+
+<footer>
+
+⭐ Hecho con amor para niños y familias ⭐
+
+</footer>
+
+<script>
+
+const board = document.getElementById("board");
+
+const imageSelect = document.getElementById("imageSelect");
+const difficulty = document.getElementById("difficulty");
+
+const startBtn = document.getElementById("startBtn");
+
+const movesText = document.getElementById("moves");
+const timeText = document.getElementById("time");
+const message = document.getElementById("message");
+
+let pieces = [];
+let size = 3;
+
+let moves = 0;
+
+let seconds = 0;
+let timer = null;
+
+let selectedPiece = null;
+
+function startTimer(){
+
+    clearInterval(timer);
+
+    seconds = 0;
+
+    updateClock();
+
+    timer = setInterval(()=>{
+
+        seconds++;
+
+        updateClock();
+
+    },1000);
+
+}
+
+function updateClock(){
+
+    const min = Math.floor(seconds/60);
+
+    const sec = seconds%60;
+
+    timeText.textContent =
+        String(min).padStart(2,"0")
+        + ":"
+        + String(sec).padStart(2,"0");
+
+}
+
+function createPuzzle(){
+
+    board.innerHTML = "";
+
+    pieces = [];
+
+    message.style.display = "none";
+
+    size = parseInt(difficulty.value);
+
+    board.style.gridTemplateColumns = `repeat(${size},1fr)`;
+    board.style.gridTemplateRows = `repeat(${size},1fr)`;
+
+    const image = imageSelect.value;
+
+    let index = 0;
+
+    for(let row=0; row<size; row++){
+
+        for(let col=0; col<size; col++){
+
+            const tile = document.createElement("div");
+
+            tile.className = "tile";
+
+            tile.style.backgroundImage = `url('${image}')`;
+
+            tile.style.backgroundRepeat = "no-repeat";
+
+            tile.style.backgroundSize = `${size*100}% ${size*100}%`;
+
+            tile.style.backgroundPosition =
+                `${(col/(size-1))*100}% ${(row/(size-1))*100}%`;
+
+            tile.dataset.correct = index;
+            tile.dataset.index = index;
+
+            tile.draggable = true;
+
+            pieces.push(tile);
+
+            board.appendChild(tile);
+
+            index++;
+
+        }
+
+    }
+
+    addEvents();
+
+}
+
+function shufflePuzzle(){
+
+    for(let i = pieces.length - 1; i > 0; i--){
+
+        const j = Math.floor(Math.random() * (i + 1));
+
+        [pieces[i], pieces[j]] = [pieces[j], pieces[i]];
+
+    }
+
+    redrawBoard();
+
+}
+
+function redrawBoard(){
+
+    board.innerHTML = "";
+
+    pieces.forEach((piece,index)=>{
+
+        piece.dataset.index = index;
+
+        board.appendChild(piece);
+
+    });
+
+}
+
+function addEvents(){
+
+    pieces.forEach(piece=>{
+
+        piece.addEventListener("dragstart",dragStart);
+
+        piece.addEventListener("dragover",dragOver);
+
+        piece.addEventListener("drop",dropPiece);
+
+        piece.addEventListener("dragend",dragEnd);
+
+    });
+
+}
+
+function dragStart(){
+
+    selectedPiece = this;
+
+}
+
+function dragOver(e){
+
+    e.preventDefault();
+
+}
+
+function dropPiece(){
+
+    if(selectedPiece===this) return;
+
+    const index1 = Number(selectedPiece.dataset.index);
+
+    const index2 = Number(this.dataset.index);
+
+    [pieces[index1], pieces[index2]] =
+    [pieces[index2], pieces[index1]];
+
+    redrawBoard();
+
+    moves++;
+
+    movesText.textContent = moves;
+
+    addEvents();
+
+    checkVictory();
+
+}
+
+function dragEnd(){
+
+    selectedPiece = null;
+
+}
+
+startBtn.onclick = ()=>{
+
+    moves = 0;
+
+    movesText.textContent = "0";
+
+    createPuzzle();
+
+    shufflePuzzle();
+
+    startTimer();
+
+};
+
+createPuzzle();
+
+function checkVictory(){
+
+    let completed = true;
+
+    for(let i = 0; i < pieces.length; i++){
+
+        if(Number(pieces[i].dataset.correct) !== i){
+
+            completed = false;
+            break;
+
+        }
+
+    }
+
+    if(completed){
+
+        clearInterval(timer);
+
+        message.style.display = "block";
+
+        board.style.boxShadow =
+            "0 0 30px gold";
+
+        startBtn.textContent = "🎉 Jugar otra vez";
+
+    }
+
+}
+
+imageSelect.addEventListener("change",()=>{
+
+    clearInterval(timer);
+
+    moves = 0;
+
+    seconds = 0;
+
+    updateClock();
+
+    movesText.textContent = "0";
+
+    board.style.boxShadow =
+        "0 6px 15px rgba(0,0,0,.2)";
+
+    startBtn.textContent = "🎲 Mezclar";
+
+    createPuzzle();
+
+});
+
+difficulty.addEventListener("change",()=>{
+
+    clearInterval(timer);
+
+    moves = 0;
+
+    seconds = 0;
+
+    updateClock();
+
+    movesText.textContent = "0";
+
+    board.style.boxShadow =
+        "0 6px 15px rgba(0,0,0,.2)";
+
+    startBtn.textContent = "🎲 Mezclar";
+
+    createPuzzle();
+
+});
+
+updateClock();
+
+createPuzzle();
+
+</script>
+
+</body>
+</html>
