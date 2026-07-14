@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Memorama - Mundo Aurora</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+    margin:0;
+    font-family:'Fredoka',sans-serif;
+    background:#87ceeb;
+}
+
+header{
+    background:linear-gradient(
+        120deg,
+        #00ff88,
+        #00ffd5,
+        #4da6ff,
+        #8a5cff,
+        #ff66cc
+    );
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+h1{
+    margin:0;
+}
+
+.info{
+    text-align:center;
+    margin:20px;
+    font-size:22px;
+    color:white;
+}
+
+#board{
+
+    max-width:1100px;
+
+    margin:auto;
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
+
+    gap:15px;
+
+    padding:20px;
+}
+
+.card{
+
+    aspect-ratio:1;
+
+    position:relative;
+
+    cursor:pointer;
+
+    transform-style:preserve-3d;
+
+    transition:.5s;
+}
+
+.card.flip{
+
+    transform:rotateY(180deg);
+}
+
+.front,
+.back{
+
+    position:absolute;
+
+    width:100%;
+    height:100%;
+
+    border-radius:20px;
+
+    backface-visibility:hidden;
+
+    overflow:hidden;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    box-shadow:0 6px 10px rgba(0,0,0,.2);
+}
+
+.front{
+
+    background:white;
+
+    transform:rotateY(180deg);
+}
+
+.front img{
+
+    width:90%;
+    height:90%;
+    object-fit:contain;
+}
+
+.back{
+
+    background:linear-gradient(135deg,#ff69b4,#8a5cff);
+
+    color:white;
+
+    font-size:55px;
+}
+
+button{
+
+    display:block;
+
+    margin:25px auto;
+
+    padding:15px 35px;
+
+    border:none;
+
+    border-radius:30px;
+
+    background:#ff69b4;
+
+    color:white;
+
+    font-size:20px;
+
+    cursor:pointer;
+}
+
+button:hover{
+
+    background:#ff1493;
+}
+
+#mensaje{
+
+    text-align:center;
+
+    color:white;
+
+    font-size:34px;
+
+    margin:20px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+<h1>Memoria</h1>
+
+</header>
+
+<div class="info">
+
+Movimientos:
+<span id="moves">0</span>
+
+&nbsp;&nbsp;⭐&nbsp;&nbsp;
+
+Parejas:
+<span id="pairs">0</span>/14
+
+</div>
+
+<div id="board"></div>
+
+<div id="mensaje"></div>
+
+<button onclick="startGame()">
+Nueva partida
+</button>
+
+<script>
+
+const personajes=[
+
+"Papá pinguino.png",
+"Mamá pinguino.png",
+"Pingo.png",
+"Pipo.png",
+"Nina.png",
+"Bebé pinguino.png",
+"Luna.png",
+"Mimi.png",
+"Bebé unicornio.png",
+"Mamá dragona.png",
+"Aura.png",
+"Brisa.png",
+"Rosita.png",
+"Muñeco de nieve.png"
+
+];
+
+let cartas=[];
+let primera=null;
+let segunda=null;
+
+let bloqueo=false;
+
+let movimientos=0;
+let parejas=0;
+
+const tablero=document.getElementById("board");
+
+function mezclar(array){
+
+    for(let i=array.length-1;i>0;i--){
+
+        let j=Math.floor(Math.random()*(i+1));
+
+        [array[i],array[j]]=[array[j],array[i]];
+    }
+
+}
+
+function startGame(){
+
+    tablero.innerHTML="";
+
+    document.getElementById("mensaje").textContent="";
+
+    movimientos=0;
+    parejas=0;
+
+    document.getElementById("moves").textContent=0;
+    document.getElementById("pairs").textContent=0;
+
+    primera=null;
+    segunda=null;
+    bloqueo=false;
+
+    cartas=[...personajes,...personajes];
+
+    mezclar(cartas);
+
+    cartas.forEach(imagen=>{
+
+        const carta=document.createElement("div");
+
+        carta.className="card";
+
+        carta.dataset.img=imagen;
+
+        carta.innerHTML=`
+
+        <div class="front">
+
+            <img src="${imagen}">
+
+        </div>
+
+        <div class="back">
+    	    <img src="Logo.png" style="width:75%;">
+	</div>
+
+        `;
+
+        carta.onclick=()=>voltear(carta);
+
+        tablero.appendChild(carta);
+
+    });
+
+}
+
+function voltear(carta){
+
+    if(bloqueo)return;
+
+    if(carta.classList.contains("flip"))return;
+
+    carta.classList.add("flip");
+
+    if(!primera){
+
+        primera=carta;
+        return;
+
+    }
+
+    segunda=carta;
+
+    movimientos++;
+
+    document.getElementById("moves").textContent=movimientos;
+
+    if(primera.dataset.img===segunda.dataset.img){
+
+        parejas++;
+
+        document.getElementById("pairs").textContent=parejas;
+
+        primera=null;
+        segunda=null;
+
+        if(parejas===14){
+
+            document.getElementById("mensaje").innerHTML="🎉 ¡Felicidades! Encontraste todas las parejas.";
+
+        }
+
+    }else{
+
+        bloqueo=true;
+
+        setTimeout(()=>{
+
+            primera.classList.remove("flip");
+
+            segunda.classList.remove("flip");
+
+            primera=null;
+            segunda=null;
+
+            bloqueo=false;
+
+        },900);
+
+    }
+
+}
+
+startGame();
+
+</script>
+
+</body>
+</html>
