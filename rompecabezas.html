@@ -443,6 +443,8 @@ function createPuzzle(){
             tile.dataset.correct = index;
             tile.dataset.index = index;
 
+            tile.draggable = true;
+
             pieces.push(tile);
 
             board.appendChild(tile);
@@ -489,29 +491,36 @@ function addEvents(){
 
     pieces.forEach(piece=>{
 
-        piece.onpointerdown = pointerDown;
-        piece.onpointerup = pointerUp;
+        piece.addEventListener("dragstart",dragStart);
+
+        piece.addEventListener("dragover",dragOver);
+
+        piece.addEventListener("drop",dropPiece);
+
+        piece.addEventListener("dragend",dragEnd);
 
     });
 
 }
 
-function pointerDown(){
+function dragStart(){
 
     selectedPiece = this;
 
 }
 
-function pointerUp(){
+function dragOver(e){
 
-    if(!selectedPiece || selectedPiece === this){
+    e.preventDefault();
 
-        selectedPiece = null;
-        return;
+}
 
-    }
+function dropPiece(){
+
+    if(selectedPiece===this) return;
 
     const index1 = Number(selectedPiece.dataset.index);
+
     const index2 = Number(this.dataset.index);
 
     [pieces[index1], pieces[index2]] =
@@ -520,9 +529,16 @@ function pointerUp(){
     redrawBoard();
 
     moves++;
+
     movesText.textContent = moves;
 
+    addEvents();
+
     checkVictory();
+
+}
+
+function dragEnd(){
 
     selectedPiece = null;
 
